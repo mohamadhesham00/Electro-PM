@@ -22,8 +22,7 @@ namespace Application.Features.Auth.Commands.Login
             var users = await _userRepository.FindAsync(u => u.Email == request.Email);
             var user = users.FirstOrDefault();
 
-            if (user == null) throw new NotFoundException("User not found.");
-            if (!BCrypt.Net.BCrypt.Verify(request.Password, user.Password)) throw new UnauthorizedAccessException("Invalid email or password.");
+            if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password)) throw new UnauthorizedAccessException("Invalid email or password.");
 
             var token = _jwtTokenService.GenerateToken(user);
             return new LoginResponse(token, user.Email);
