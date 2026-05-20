@@ -1,10 +1,11 @@
-﻿using Domain.Repositories;
+﻿using API.Extensions;
+using Domain.Repositories;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure
+namespace Infrastructure.Extensions
 {
     public static class DependencyInjection
     {
@@ -14,6 +15,8 @@ namespace Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddJwtAuthentication(configuration);
 
             return services;
         }
