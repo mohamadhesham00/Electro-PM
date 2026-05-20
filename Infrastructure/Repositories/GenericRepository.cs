@@ -4,10 +4,9 @@ using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories
 {
-    public class GenericRepository<T>(DbContext context) : IGenericRepository<T> where T : class
+    public class GenericRepository<T>(AppDbContext context) : IGenericRepository<T> where T : class
     {
-        // We use generic dbContext beacause we may later want to use this repository with multiple contexts. If we used AppDbContext, we would be tightly coupled to it.
-        protected readonly DbContext _context = context;
+        protected readonly AppDbContext _context = context;
         protected readonly DbSet<T> _dbSet = context.Set<T>();
 
         public async Task<T?> GetByIdAsync(Guid id) => await _dbSet.FindAsync(id);
@@ -23,5 +22,7 @@ namespace Infrastructure.Repositories
         public void Update(T entity) => _context.Entry(entity).State = EntityState.Modified;
 
         public void Delete(T entity) => _dbSet.Remove(entity);
+
+        public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
     }
 }
