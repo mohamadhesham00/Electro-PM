@@ -1,4 +1,4 @@
-using Application.Services;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Repositories;

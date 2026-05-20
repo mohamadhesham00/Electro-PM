@@ -1,5 +1,5 @@
 ﻿using API.Extensions;
-using Application.Services;
+using Application.Common.Interfaces;
 using Domain.Repositories;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
