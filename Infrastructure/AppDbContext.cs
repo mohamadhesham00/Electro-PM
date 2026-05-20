@@ -27,6 +27,24 @@ namespace Infrastructure
                 .Property(t => t.Priority)
                 .HasConversion<string>();
 
+            // seed some admin, user
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = Guid.Parse("B74A3D90-7F89-4D2A-8B6C-773C33D252E1"),
+                    Email = "user@example.com",
+                    Password = "$2a$12$v7QEJTY67SZKKP0g94O/s.Q8A0HLLHC5HLbcMCGUGGeDUcx3/HeZa",
+                    Role = Domain.Enums.UserRole.User
+                },
+                new User
+                {
+                    Id = Guid.Parse("A12B4E91-1A22-4B1C-BD6E-884D44E363F2"),
+                    Email = "admin@example.com",
+                    Password = "$2a$12$v7QEJTY67SZKKP0g94O/s.Q8A0HLLHC5HLbcMCGUGGeDUcx3/HeZa",
+                    Role = Domain.Enums.UserRole.Admin
+                }
+            );
+
         }
     }
 }
