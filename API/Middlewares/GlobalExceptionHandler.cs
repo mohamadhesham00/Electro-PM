@@ -1,4 +1,5 @@
 ﻿using Application.Common.Models;
+using Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 
@@ -24,6 +25,8 @@ namespace API.Middlewares
             var statusCode = exception switch
             {
                 KeyNotFoundException => HttpStatusCode.NotFound,             // 404 Not Found
+                NotFoundException => HttpStatusCode.NotFound,             // 404 Not Found
+                AlreadyExistsException => HttpStatusCode.Conflict,           // 409 Conflict
                 ArgumentException => HttpStatusCode.BadRequest,              // 400 Bad Request
                 UnauthorizedAccessException => HttpStatusCode.Unauthorized,  // 401 Unauthorized
                 _ => HttpStatusCode.InternalServerError                      // 500 Server Error
