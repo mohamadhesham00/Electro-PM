@@ -1,0 +1,6 @@
+using MediatR;
+
+namespace Application.Features.Tasks.Commands.Delete
+{
+    public record DeleteTaskCommand(Guid TaskId, Guid ProjectId, Guid UserId) : IRequest<Unit>;
+}
