@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 using Domain.Exceptions;
 using Domain.Repositories;
 using MediatR;
@@ -21,7 +22,7 @@ namespace Application.Features.Auth.Commands.Register
             if (existingUsers.Any()) throw new AlreadyExistsException("Email taken.");
 
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
-            var user = new User { Id = Guid.NewGuid(), Email = request.Email, Password= hashedPassword };
+            var user = new User { Id = Guid.NewGuid(), Email = request.Email, Password= hashedPassword, Role =  UserRole.User };
             await _userRepository.AddAsync(user);
             await _userRepository.SaveChangesAsync();
         }
