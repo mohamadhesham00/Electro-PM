@@ -1,4 +1,7 @@
-﻿namespace API.Extensions
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
+
+namespace API.Extensions
 {
     public static class SwaggerExtensions
     {
