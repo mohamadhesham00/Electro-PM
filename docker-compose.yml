@@ -25,10 +25,29 @@ services:
     ports:
       - "8080:5273"
     environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:5273
+      - DOTNET_LAUNCH_PROFILE=""
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=ElectroPmDb;User Id=sa;Password=YourStrong@Password123;TrustServerCertificate=True;
+      - JwtSettings__Key=YourSuperSecretBackingKeyThatIsVeryLongAndSecure123!
+      - JwtSettings__Issuer=ElectroPmApi
+      - JwtSettings__Audience=ElectroPmClient
     depends_on:
       sqlserver:
         condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: ./API
+          target: /app/API
+        - action: sync
+          path: ./Infrastructure
+          target: /app/Infrastructure
+        - action: sync
+          path: ./Application
+          target: /app/Application
+        - action: sync
+          path: ./Domain
+          target: /app/Domain
 
 volumes:
   electropm_sqldata:
