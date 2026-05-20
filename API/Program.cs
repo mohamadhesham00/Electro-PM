@@ -1,10 +1,15 @@
+using API.Middlewares;
 using Application;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Connect to db
+// Register the global exception handler middleware and ProblemDetails for standardized error responses
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails(); 
+
+// Register services from the Application and Infrastructure layers
 builder.Services.AddInfrastructure(builder.Configuration)
     .AddApplication();
 
