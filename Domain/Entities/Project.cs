@@ -7,5 +7,7 @@ public class Project
     public string Description { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
 
+    public Guid OwnerId { get; set; }
+
     public ICollection<TaskItem> Tasks { get; set; } = [];
 }
