@@ -1,7 +1,15 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
+# Set default behavior to automatic handling of text files
 * text=auto
+
+# Explicitly enforce LF line endings for all shell scripts
+*.sh text eol=lf
+
+# Explicitly enforce LF for other files that typically break on Windows endings (optional but recommended)
+*.bash text eol=lf
+Dockerfile text eol=lf
 
 ###############################################################################
 # Set default behavior for command prompt diff.
