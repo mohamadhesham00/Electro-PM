@@ -80,6 +80,26 @@ Migration files are in `Infrastructure/Migrations`.
 - Swagger is available in development at `/swagger`
 - Request examples are also documented in `docs/POSTMAN_COMPLETE_GUIDE.md`
 
+## Seeded login users
+
+The database seeds two users you can use right away:
+
+- Admin
+  ```json
+  {
+    "email": "admin@example.com",
+    "password": "Strong@123"
+  }
+  ```
+- User
+  ```json
+  {
+    "email": "user@example.com",
+    "password": "Strong@123"
+  }
+  ```
+
+
 ## Achievements
 
 - Implemented JWT authentication for register/login
